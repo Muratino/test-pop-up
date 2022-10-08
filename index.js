@@ -1,56 +1,25 @@
-
-
 const wrapper = document.querySelector(".wrapper__modal");
 const buttonTrue = document.querySelector("#btn-true");
 const buttonFalse = document.querySelector("#btn-false");
-
+const modalButton = document.querySelector('.modal__button');
 const openModalTime = setTimeout(open, 1000);
 
 function open() {
     wrapper.classList.add("active");
-    buttonTrue.addEventListener('click', (e) => {
-        savePage(e) 
-        close();
-        // ? console.log('Удачно добавлена закладка') : console.log(' НЕ получилось добавить закладку') ;
-    })
+    buttonTrue.addEventListener('click', (e) => {savePage(e, buttonTrue), close()})
     buttonFalse.addEventListener('click', close);
     clearInterval(openModalTime);
 }
 
+function savePage(e, a) {
+    // let title = document.title;
+    // let url = location.href;
 
-function savePage(a) {
-    let title = document.title;  
-    let url = location.href; 
-
-    try {
-        // Internet Explorer 
-        window.external.AddFavorite(url, title);
-    }
-    catch (e) {
-        try {
-            // Mozilla 
-            window.sidebar.addPanel(title, url, "");
-        }
-        catch (e) {
-            // Opera 
-            if (typeof (opera) == "object") {
-                a.rel = "sidebar";
-                a.title = title;
-                a.url = url;
-                return true;
-            }
-            else {
-                // Unknown 
-                alert('Ваш браузер не поддерживает автоматическое добавление закладок. Нажмите Ctrl+D чтобы добавить страницу в закладки.');
-            }
-        }
-    }
-    return false;
+    alert('Ваш браузер не поддерживает автоматическое скачиване веб-страниц. Нажмите Ctrl+S чтобы скачать страницу.');
 }
 
 function close() {
     wrapper.classList.remove("active");
 }
 
-
-window.addEventListener('DOMContentLoaded', () => { openModalTime })
+window.addEventListener('DOMContentLoaded', () => openModalTime)
